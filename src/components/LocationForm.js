@@ -72,7 +72,7 @@ export const LocationForm = ({ onAdd }) => {
           </div>
         </FormGroup>
       </MuiPickersUtilsProvider>
-      <Button variant="contained" color="primary" onClick={() => onAdd({
+      <Button variant="contained" disabled={!location || !location.name} color="primary" onClick={() => onAdd({
         id: randomId(),
         name: location.name,
         lat: location.lat,

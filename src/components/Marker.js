@@ -9,7 +9,7 @@ export const Marker = ({ location, open = false }) => {
       onClick={() => setIsOpen(!isOpen)}
       style={{ width: 50, height: 50, background: 'rgba(243,7,7,0.3)', borderRadius: '50%', cursor: 'pointer', position: 'relative' }}>
       {isOpen &&
-        <Paper style={{ padding: 5, position: 'absolute', top: -85, height: 70, width: 100 }}>
+        <Paper style={{ padding: 5, position: 'absolute', top: -85, height: 70, width: 100, zIndex: 999 }}>
           <Typography variant="caption">{name}</Typography>
           <Typography variant="caption">{date}</Typography>
           <div>
