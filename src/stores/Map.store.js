@@ -19,7 +19,7 @@ export default class Map {
     this.locations[data.id] = data;
   };
 
-  @action deleteItem = (itemId) => {
+  @action deleteLocation = (itemId) => {
     this.locations[itemId] && delete this.locations[itemId];
   }
 }
