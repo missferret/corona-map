@@ -12,6 +12,16 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
     },
     zoom: 11
   };
+
+    const distanceToMouse = (pt, mousePos) => {
+      if (pt && mousePos) {
+        return Math.sqrt(
+          (pt.x - mousePos.x) * (pt.x - mousePos.x) +
+          (pt.y - mousePos.y) * (pt.y - mousePos.y)
+        );
+      }
+    };
+
   return (
     <Observer>
       {() => {
@@ -22,6 +32,7 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
               bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
               defaultCenter={defaultProps.center}
               defaultZoom={defaultProps.zoom}
+              distanceToMouse={distanceToMouse}
             >
               {
                 Object.keys(locations).map(location => {
