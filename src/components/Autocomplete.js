@@ -3,7 +3,7 @@ import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocom
 import useOnclickOutside from 'react-cool-onclickoutside';
 import { TextField, Menu, MenuItem } from '@material-ui/core';
 
-export const PlacesAutocomplete = () => {
+export const PlacesAutocomplete = ({ onSelect }) => {
   const {
     ready,
     value,
@@ -42,7 +42,7 @@ export const PlacesAutocomplete = () => {
     getGeocode({ address: description })
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {
-        console.log('📍 Coordinates: ', { lat, lng });
+        onSelect({ lat, lng, name: description })
       }).catch(error => {
       console.log('😱 Error: ', error)
     });
@@ -67,19 +67,13 @@ export const PlacesAutocomplete = () => {
 
   return (
     <div ref={ref}>
-      <TextField
+      <input
         value={value}
         onChange={handleInput}
         disabled={!ready}
         placeholder="Where are you going?"
-        fullWidth
       />
-      <Menu
-        keepMounted
-        anchorEl={anchorEl}
-        open={status === 'OK' || Boolean(anchorEl)}>
-        {renderSuggestions()}
-      </Menu>
+      {status === 'OK' && <ul>{renderSuggestions()}</ul>}
     </div>
   );
 };
