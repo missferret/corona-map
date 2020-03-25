@@ -14,4 +14,8 @@ export default class Map {
     this.rootStore = rootStore;
     return this;
   }
+
+  @action addLocation = (data) => {
+    this.locations[data.id] = data;
+  }
 }

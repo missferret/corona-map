@@ -6,15 +6,14 @@ import withMobx from './HOCs/WithMobx';
 import { LocationsList } from './components/LocationsList';
 
 const store = createStore();
-console.log(store)
-function App() {
+const App = () => {
   return (
     <div className="App" style={{ display: 'flex' }}>
-      <MainMap locations={store.map.locations}/>
-      <LocationsList/>
+      <MainMap/>
+      <LocationsList onAdd={store.map.addLocation}/>
     </div>
   );
-}
+};
 
 export default withMobx(
   App,

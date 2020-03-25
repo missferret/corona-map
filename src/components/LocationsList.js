@@ -1,19 +1,31 @@
 import React from 'react';
-import { locations } from '../stubs/locations';
+import { LocationForm } from './LocationForm';
+import { inject, Observer } from 'mobx-react';
 
-export const LocationsList = () => {
+const LocationsListView = ({ store }) => {
   return (
-    <div style={{ width: '40%' }}>
-      {
-        Object.keys(locations).map(location => {
-          const locationData = locations[location];
-          return (
-            <div>
-              {locationData.name}
-            </div>
-          )
-        })
-      }
-    </div>
-  )
+    <Observer>
+      {() => {
+        const { addLocation, locations } = store.map;
+        return (
+          <div style={{ width: '40%' }}>
+            <LocationForm onAdd={addLocation}/>
+            {
+              Object.keys(locations).map(location => {
+                const locationData = locations[location];
+                return (
+                  <div key={locationData.id}>
+                    {locationData.name}
+                  </div>
+                )
+              })
+            }
+          </div>
+        )
+      }}
+    </Observer>
+  );
 };
+
+export const LocationsList = inject('store')(LocationsListView);
+
