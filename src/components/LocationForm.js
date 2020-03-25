@@ -54,7 +54,7 @@ export const LocationForm = ({ existingLocation, onAdd, onEdit }) => {
   }, [location, endTime, startTime, selectedDate]);
 
   return (
-    <>
+    <div style={{ marginBottom: 20 }}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <PlacesAutocomplete existingValue={location && location.name} onSelect={setLocation}/>
         <FormGroup style={{ marginBottom: 10 }}>
@@ -102,6 +102,6 @@ export const LocationForm = ({ existingLocation, onAdd, onEdit }) => {
         onClick={existingLocation ? handleEdit : handleAdd}>
         {existingLocation ? 'update' : 'add'}
       </Button>
-    </>
+    </div>
   )
 };

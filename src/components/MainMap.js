@@ -26,7 +26,7 @@ const MainMapView = ({ store }) => {
       {() => {
         const { locations } = store.map;
         return (
-          <div style={{ height: '100vh', width: '60%' }}>
+          <div style={{ height: '100vh', width: '100%' }}>
             <GoogleMapReact
               bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
               defaultCenter={defaultProps.center}
