@@ -1,9 +1,17 @@
 import { observable, action, computed } from 'mobx';
+import { locations } from '../stubs/locations';
 
 export default class Map {
-  @observable location = {};
+  @observable locations = locations;
 
-  init() {
-    console.log("initi!")
+  constructor (externalStore) {
+    if (externalStore) {
+      Object.assign(this, externalStore);
+    }
+  }
+
+  init (rootStore) {
+    this.rootStore = rootStore;
+    return this;
   }
 }

@@ -1,10 +1,9 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
-import { locations } from '../stubs/locations';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-export const MainMap = () => {
+export const MainMap = ({ locations }) => {
   const defaultProps = {
     center: {
       lat: 59.95,
