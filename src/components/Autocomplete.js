@@ -67,11 +67,12 @@ export const PlacesAutocomplete = ({ onSelect }) => {
 
   return (
     <div ref={ref}>
-      <input
+      <TextField
         value={value}
         onChange={handleInput}
         disabled={!ready}
         placeholder="Where are you going?"
+        fullWidth
       />
       {status === 'OK' && <ul>{renderSuggestions()}</ul>}
     </div>
