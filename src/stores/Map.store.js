@@ -16,11 +16,17 @@ export default class Map {
   }
 
   @action addLocation = (data) => {
-    console.log(data)
     this.locations[data.id] = data;
   };
 
   @action deleteLocation = (itemId) => {
     this.locations[itemId] && delete this.locations[itemId];
+  };
+
+  @action editLocation = (itemId, data) => {
+    this.locations[itemId] && (this.locations[itemId] = {
+      ...this.locations[itemId],
+      ...data,
+    });
   }
 }

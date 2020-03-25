@@ -1,14 +1,20 @@
 import React from 'react';
 import { LocationForm } from './LocationForm';
 import { inject, Observer } from 'mobx-react';
-import { Typography, List, ListItem, ListItemText, IconButton } from '@material-ui/core';
-import { Delete } from '@material-ui/icons'
+import { Typography, List } from '@material-ui/core';
+import { LocationItem } from './LocationItem';
 
 const LocationsListView = ({ store }) => {
   return (
     <Observer>
       {() => {
-        const { addLocation, deleteLocation, locations } = store.map;
+        const {
+          addLocation,
+          deleteLocation,
+          editLocation,
+          locations
+        } = store.map;
+
         return (
           <div style={{ width: '40%', padding: 20 }}>
             <Typography>Add a new location</Typography>
@@ -18,21 +24,11 @@ const LocationsListView = ({ store }) => {
                 Object.keys(locations).map(location => {
                   const locationData = locations[location];
                   return (
-                    <ListItem disableGutters key={locationData.id} style={{ borderTop: '1px solid #f0f0f0' }}>
-                      <ListItemText>
-                        <Typography>{locationData.name}</Typography>
-                        <Typography variant="caption">
-                          from {locationData.startTime}&nbsp;
-                          Until {locationData.endTime}
-                        </Typography>
-                      </ListItemText>
-                      <Typography variant="caption">
-                        {locationData.date}
-                      </Typography>
-                      <IconButton edge="end" aria-label="delete" onClick={() => deleteLocation(location)}>
-                        <Delete />
-                      </IconButton>
-                    </ListItem>
+                    <LocationItem
+                      location={locationData}
+                      onDelete={deleteLocation}
+                      onEdit={editLocation}
+                    />
                   )
                 })
               }

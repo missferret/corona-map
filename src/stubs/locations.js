@@ -1,5 +1,6 @@
 export const locations = {
   75927353: {
+    id: 75927353,
     name: "HaSharon, Israel",
     lat: 32.3235643,
     lng: 34.9286096,

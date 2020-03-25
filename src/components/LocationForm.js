@@ -12,11 +12,11 @@ import { PlacesAutocomplete } from './Autocomplete';
 import { randomId } from '../utils/general';
 import moment from 'moment';
 
-export const LocationForm = ({ onAdd }) => {
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
-  const [startTime, setStartTime] = React.useState(new Date('2014-08-18T21:11:54'));
-  const [endTime, setEndTime] = React.useState(new Date('2014-08-18T21:11:54'));
-  const [location, setLocation] =  React.useState('');
+export const LocationForm = ({ existingLocation, onAdd, onEdit }) => {
+  const [selectedDate, setSelectedDate] = React.useState(existingLocation ? existingLocation.date : new Date('2014-08-18T21:11:54'));
+  const [startTime, setStartTime] = React.useState(existingLocation ? existingLocation.startTime : new Date('2014-08-18T21:11:54'));
+  const [endTime, setEndTime] = React.useState(existingLocation ? existingLocation.endTime : new Date('2014-08-18T21:11:54'));
+  const [location, setLocation] =  React.useState(existingLocation);
 
   const handleDateChange = date => {
     setSelectedDate(date);
@@ -30,10 +30,33 @@ export const LocationForm = ({ onAdd }) => {
     setEndTime(time);
   };
 
+  const handleAdd = React.useCallback(() => {
+    onAdd({
+      id: randomId(),
+      name: location.name,
+      lat: location.lat,
+      lng: location.lng,
+      date: moment(selectedDate).format('l'),
+      startTime: moment(startTime).format("HH:mm"),
+      endTime: moment(endTime).format("HH:mm"),
+    })
+  }, [location, endTime, startTime, selectedDate]);
+
+  const handleEdit = React.useCallback(() => {
+    onEdit(location.id, {
+      name: location.name,
+      lat: location.lat,
+      lng: location.lng,
+      date: moment(selectedDate).format('l'),
+      startTime: moment(startTime).format("HH:mm"),
+      endTime: moment(endTime).format("HH:mm"),
+    })
+  }, [location, endTime, startTime, selectedDate]);
+
   return (
     <>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <PlacesAutocomplete onSelect={setLocation}/>
+        <PlacesAutocomplete existingValue={location && location.name} onSelect={setLocation}/>
         <FormGroup style={{ marginBottom: 10 }}>
           <KeyboardDatePicker
             disableToolbar
@@ -72,16 +95,12 @@ export const LocationForm = ({ onAdd }) => {
           </div>
         </FormGroup>
       </MuiPickersUtilsProvider>
-      <Button variant="contained" disabled={!location || !location.name} color="primary" onClick={() => onAdd({
-        id: randomId(),
-        name: location.name,
-        lat: location.lat,
-        lng: location.lng,
-        date: moment(selectedDate).format('l'),
-        startTime: moment(startTime).format("HH:mm"),
-        endTime: moment(endTime).format("HH:mm"),
-      })}>
-        add
+      <Button
+        variant="contained"
+        disabled={!location || !location.name}
+        color="primary"
+        onClick={existingLocation ? handleEdit : handleAdd}>
+        {existingLocation ? 'update' : 'add'}
       </Button>
     </>
   )
