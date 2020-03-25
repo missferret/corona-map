@@ -10,6 +10,7 @@ import {
 } from '@material-ui/pickers';
 import { PlacesAutocomplete } from './Autocomplete';
 import { randomId } from '../utils/general';
+import moment from 'moment';
 
 export const LocationForm = ({ onAdd }) => {
   const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
@@ -76,9 +77,9 @@ export const LocationForm = ({ onAdd }) => {
         name: location.name,
         lat: location.lat,
         lng: location.lng,
-        date: selectedDate,
-        startTime,
-        endTime,
+        date: moment(selectedDate).format('l'),
+        startTime: moment(startTime).format("HH:mm"),
+        endTime: moment(endTime).format("HH:mm"),
       })}>
         add
       </Button>

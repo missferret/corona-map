@@ -16,6 +16,7 @@ export default class Map {
   }
 
   @action addLocation = (data) => {
+    console.log(data)
     this.locations[data.id] = data;
   };
 
