@@ -9,11 +9,11 @@ export const Marker = ({ location, open = false, onDelete, onEdit }) => {
   const formattedDate = moment(date).format('l');
   const formattedTime = time => moment(time).format("HH:mm");
 
-  const handleDelete = React.useCallback((e) => {
+  const handleDelete = React.useCallback(() => {
     onDelete(location.id);
   }, [location]);
 
-  const handleEdit = React.useCallback((e) => {
+  const handleEdit = React.useCallback(() => {
     onEdit(location.id);
   }, [location]);
 
