@@ -11,6 +11,19 @@ import {
 import { PlacesAutocomplete } from './Autocomplete';
 import { randomId } from '../utils/general';
 
+const styles = {
+  container: {
+    marginBottom: 20
+  },
+  form: {
+    marginBottom: 20
+  },
+  timePickers: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  }
+};
+
 export const LocationForm = ({ existingLocation, onAdd, onEdit }) => {
   const [selectedDate, setSelectedDate] = React.useState(existingLocation ? existingLocation.date : new Date());
   const [startTime, setStartTime] = React.useState(existingLocation ? new Date(existingLocation.startTime) : new Date());
@@ -51,10 +64,10 @@ export const LocationForm = ({ existingLocation, onAdd, onEdit }) => {
   }, [location, endTime, startTime, selectedDate]);
 
   return (
-    <div style={{ marginBottom: 20 }}>
+    <div style={styles.container}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <PlacesAutocomplete existingValue={location && location.name} onSelect={setLocation}/>
-        <FormGroup style={{ marginBottom: 10 }}>
+        <FormGroup style={styles.form}>
           <KeyboardDatePicker
             disableToolbar
             variant="inline"
@@ -68,7 +81,7 @@ export const LocationForm = ({ existingLocation, onAdd, onEdit }) => {
               'aria-label': 'change date',
             }}
           />
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div style={styles.timePickers}>
             <KeyboardTimePicker
               margin="normal"
               id="time-picker"

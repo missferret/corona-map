@@ -6,6 +6,19 @@ import { LocationItem } from './LocationItem';
 import 'date-fns';
 import { Filters } from './Filters';
 
+const styles = {
+  container: {
+    width: '40%',
+    maxWidth: 500,
+    padding: 20
+  },
+  noItems: {
+    padding: 10,
+    background: '#f0f0f0',
+    border: 'none',
+  }
+};
+
 const LocationsListView = ({ store }) => {
   return (
     <Observer>
@@ -27,7 +40,7 @@ const LocationsListView = ({ store }) => {
         const list = areFiltersSet ? filteredLocations : locations;
 
         return (
-          <div style={{ width: '40%', maxWidth: 500, padding: 20 }}>
+          <div style={styles.container}>
             <Filters
               filters={filters}
               onFilter={onFilter}
@@ -53,7 +66,7 @@ const LocationsListView = ({ store }) => {
                     )
                   })
                 :
-                  <Paper elevation={0} variant="outlined" square style={{ padding: 10, background: '#f0f0f0', border: 'none'}}>
+                  <Paper elevation={0} variant="outlined" square style={styles.noItems}>
                     <Typography variant="subtitle1">
                       {areFiltersSet ? 'No available locations for the selected filters' : 'Add a location to view it on the map'}
                     </Typography>

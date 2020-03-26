@@ -3,6 +3,13 @@ import GoogleMapReact from 'google-map-react';
 import { inject, Observer } from 'mobx-react';
 import { Marker } from './Marker';
 
+const styles = {
+  container: {
+    height: '100vh',
+    width: '100%',
+  },
+};
+
 const MainMapView = ({ store }) => {
   const defaultProps = {
     center: {
@@ -35,7 +42,7 @@ const MainMapView = ({ store }) => {
         const list = areFiltersSet ? filteredLocations : locations;
 
         return (
-          <div style={{ height: '100vh', width: '100%' }}>
+          <div style={styles.container}>
             <GoogleMapReact
               bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
               defaultCenter={defaultProps.center}

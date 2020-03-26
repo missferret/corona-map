@@ -3,6 +3,27 @@ import { Paper, Typography } from '@material-ui/core';
 import { Delete, Edit } from '@material-ui/icons';
 import moment from 'moment';
 
+const styles = {
+  marker: {
+    width: 50,
+    height: 50,
+    background: 'rgba(243,7,7,0.3)',
+    borderRadius: '50%',
+    cursor: 'pointer',
+    position: 'relative',
+  },
+  markerInner: {
+    padding: 5,
+    position: 'absolute',
+    top: -95,
+    height: 80,
+    width: 110,
+    zIndex: 999,
+    display: 'flex',
+    flexDirection: 'column',
+  },
+};
+
 export const Marker = ({ location, open = false, onDelete, onEdit }) => {
   const { name, date, startTime, endTime } = location;
   const [isOpen, setIsOpen] = React.useState(open);
@@ -23,9 +44,9 @@ export const Marker = ({ location, open = false, onDelete, onEdit }) => {
   return (
     <div
       onClick={() => setIsOpen(!isOpen)}
-      style={{ width: 50, height: 50, background: 'rgba(243,7,7,0.3)', borderRadius: '50%', cursor: 'pointer', position: 'relative' }}>
+      style={styles.marker}>
       {isOpen &&
-        <Paper style={{ padding: 5, position: 'absolute', top: -95, height: 80, width: 110, zIndex: 999, display: 'flex', flexDirection: 'column' }}>
+        <Paper style={styles.markerInner}>
           <Typography variant="caption">{name}</Typography>
           <Typography variant="caption">{formattedDate}</Typography>
           <div>

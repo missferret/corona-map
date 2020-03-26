@@ -4,6 +4,25 @@ import { KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider } from 
 import DateFnsUtils from '@date-io/date-fns';
 import React from 'react';
 
+const styles = {
+  toggleButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  },
+  filtersContainer: {
+    padding: 10,
+    marginTop: 30,
+    marginBottom: 25,
+    background: 'rgb(246, 248, 253)',
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  }
+};
+
 export const Filters = ({ filters, onFilter, resetFilters }) => {
   const [ isOpen, setIsOpen ] = React.useState(false);
   const [ date, setDate ] = React.useState(filters.date);
@@ -11,12 +30,12 @@ export const Filters = ({ filters, onFilter, resetFilters }) => {
   const [ endTime, setEndTime ] = React.useState(filters.endTime);
   return (
    <>
-     <Button onClick={() => setIsOpen(!isOpen)} style={{ position: 'absolute', top: 10, right: 10 }}>
+     <Button onClick={() => setIsOpen(!isOpen)} style={styles.toggleButton}>
        {`${isOpen ? 'Hide' : 'Show'} filters`}
        {isOpen ? <Close fontSize='small'/> : <Add fontSize='small'/>}
      </Button>
      {isOpen &&
-      <div style={{ padding: 10, marginTop: 30, marginBottom: 25, background: 'rgb(246, 248, 253)' }}>
+      <div style={styles.filtersContainer}>
          <Typography variant="caption">Filter by:</Typography>
          <MuiPickersUtilsProvider utils={DateFnsUtils}>
            <FormGroup style={{ marginTop: -15 }}>
@@ -57,7 +76,7 @@ export const Filters = ({ filters, onFilter, resetFilters }) => {
              {/*</div>*/}
            </FormGroup>
          </MuiPickersUtilsProvider>
-         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10 }}>
+         <div style={styles.buttons}>
            <Button variant="text" onClick={resetFilters}>
              Reset
            </Button>
