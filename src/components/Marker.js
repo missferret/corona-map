@@ -9,18 +9,20 @@ export const Marker = ({ location, open = false, onDelete, onEdit }) => {
   const formattedDate = moment(date).format('l');
   const formattedTime = time => moment(time).format("HH:mm");
 
-  const handleDelete = React.useCallback(() => {
+  const handleDelete = React.useCallback((e) => {
+    e.stopPropagation();
     onDelete(location.id);
   }, [location]);
 
-  const handleEdit = React.useCallback(() => {
+  const handleEdit = React.useCallback((e) => {
+    e.stopPropagation();
     onEdit(location.id, true);
     setIsOpen(false);
   }, [location]);
 
   return (
     <div
-      onClick={() => setIsOpen(true)}
+      onClick={() => setIsOpen(!isOpen)}
       style={{ width: 50, height: 50, background: 'rgba(243,7,7,0.3)', borderRadius: '50%', cursor: 'pointer', position: 'relative' }}>
       {isOpen &&
         <Paper style={{ padding: 5, position: 'absolute', top: -95, height: 80, width: 110, zIndex: 999, display: 'flex', flexDirection: 'column' }}>
