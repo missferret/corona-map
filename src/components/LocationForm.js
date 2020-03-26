@@ -10,12 +10,11 @@ import {
 } from '@material-ui/pickers';
 import { PlacesAutocomplete } from './Autocomplete';
 import { randomId } from '../utils/general';
-import moment from 'moment';
 
 export const LocationForm = ({ existingLocation, onAdd, onEdit }) => {
-  const [selectedDate, setSelectedDate] = React.useState(existingLocation ? existingLocation.date : new Date('2014-08-18T21:11:54'));
-  const [startTime, setStartTime] = React.useState(existingLocation ? existingLocation.startTime : new Date('2014-08-18T21:11:54'));
-  const [endTime, setEndTime] = React.useState(existingLocation ? existingLocation.endTime : new Date('2014-08-18T21:11:54'));
+  const [selectedDate, setSelectedDate] = React.useState(existingLocation ? existingLocation.date : new Date());
+  const [startTime, setStartTime] = React.useState(existingLocation ? new Date(existingLocation.startTime) : new Date());
+  const [endTime, setEndTime] = React.useState(existingLocation ?  new Date(existingLocation.endTime) : new Date());
   const [location, setLocation] =  React.useState(existingLocation);
 
   const handleDateChange = date => {
@@ -36,20 +35,18 @@ export const LocationForm = ({ existingLocation, onAdd, onEdit }) => {
       name: location.name,
       lat: location.lat,
       lng: location.lng,
-      date: moment(selectedDate).format('l'),
-      startTime: moment(startTime).format("HH:mm"),
-      endTime: moment(endTime).format("HH:mm"),
+      date: selectedDate,
+      startTime,
+      endTime,
     })
   }, [location, endTime, startTime, selectedDate]);
 
   const handleEdit = React.useCallback(() => {
     onEdit(location.id, {
       name: location.name,
-      lat: location.lat,
-      lng: location.lng,
-      date: moment(selectedDate).format('l'),
-      startTime: moment(startTime).format("HH:mm"),
-      endTime: moment(endTime).format("HH:mm"),
+      date: selectedDate,
+      startTime,
+      endTime,
     })
   }, [location, endTime, startTime, selectedDate]);
 
