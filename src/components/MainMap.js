@@ -24,7 +24,7 @@ const MainMapView = ({ store }) => {
   return (
     <Observer>
       {() => {
-        const { locations } = store.map;
+        const { locations, deleteLocation } = store.map;
         return (
           <div style={{ height: '100vh', width: '100%' }}>
             <GoogleMapReact
@@ -42,6 +42,7 @@ const MainMapView = ({ store }) => {
                       lat={locationData.lat}
                       lng={locationData.lng}
                       location={locationData}
+                      onDelete={deleteLocation}
                     />
                   )
                 })

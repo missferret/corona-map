@@ -1,12 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { LocationForm } from './LocationForm';
-import { inject, Observer } from 'mobx-react';
-import { Typography, List, ListItem, ListItemText, IconButton } from '@material-ui/core';
+import { Observer } from 'mobx-react';
+import { Typography, ListItem, ListItemText, IconButton } from '@material-ui/core';
 import { Delete, Edit } from '@material-ui/icons'
 import moment from 'moment';
 
-export const LocationItem = ({ location, onDelete, onEdit }) => {
-  const [ isOpen, setIsOpen ] = useState(false);
+export const LocationItem = ({ location, onDelete, onEdit, open = false }) => {
+  const [ isOpen, setIsOpen ] = useState(open);
   const deleteLocation = useCallback(() => {
     onDelete(location.id)
   }, [location]);
