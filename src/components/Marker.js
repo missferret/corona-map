@@ -14,7 +14,8 @@ export const Marker = ({ location, open = false, onDelete, onEdit }) => {
   }, [location]);
 
   const handleEdit = React.useCallback(() => {
-    onEdit(location.id);
+    onEdit(location.id, true);
+    setIsOpen(false);
   }, [location]);
 
   return (

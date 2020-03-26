@@ -26,6 +26,10 @@ export default class Map {
     localStorage.setItem('locations', JSON.stringify(locations));
   };
 
+  @action setOpenState = (itemId, isOpen) => {
+    this.itemOpenStates[itemId] = isOpen;
+  };
+
   @action addLocation = (data) => {
     this.locations[data.id] = data;
     this.saveLocations();

@@ -5,21 +5,20 @@ import { Typography, ListItem, ListItemText, IconButton } from '@material-ui/cor
 import { Delete, Edit } from '@material-ui/icons'
 import moment from 'moment';
 
-export const LocationItem = ({ location, onDelete, onEdit, open = false }) => {
-  const [ isOpen, setIsOpen ] = useState(open);
+export const LocationItem = ({ location, onDelete, onEdit, setOpenState, isOpen = false }) => {
   const deleteLocation = useCallback(() => {
     onDelete(location.id)
   }, [location]);
 
   const handleEdit = useCallback((itemId, data) => {
     onEdit(itemId, data);
-    setIsOpen(false);
+    setOpenState(itemId, false);
   }, [location]);
 
   return (
     <Observer>
       {() => {
-        const { name, date, startTime, endTime } = location;
+        const { id, name, date, startTime, endTime } = location;
         const formattedDate = moment(date).format('l');
         const formattedTime = time => moment(time).format("HH:mm");
 
@@ -32,7 +31,7 @@ export const LocationItem = ({ location, onDelete, onEdit, open = false }) => {
                 {`${formattedDate} between ${formattedTime(startTime)} and ${formattedTime(endTime)}`}
               </Typography>
             </ListItemText>
-            <IconButton edge="end" aria-label="delete" onClick={() => setIsOpen(!isOpen)}>
+            <IconButton edge="end" aria-label="delete" onClick={() => setOpenState(id, !isOpen)}>
               <Edit />
             </IconButton>
             <IconButton edge="end" aria-label="delete" onClick={deleteLocation}>

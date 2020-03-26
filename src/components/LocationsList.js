@@ -12,7 +12,9 @@ const LocationsListView = ({ store }) => {
           addLocation,
           deleteLocation,
           editLocation,
-          locations
+          locations,
+          setOpenState,
+          itemOpenStates,
         } = store.map;
 
         return (
@@ -30,6 +32,8 @@ const LocationsListView = ({ store }) => {
                         location={locationData}
                         onDelete={deleteLocation}
                         onEdit={editLocation}
+                        setOpenState={setOpenState}
+                        isOpen={itemOpenStates[location]}
                       />
                     )
                   })
