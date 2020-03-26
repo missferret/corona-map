@@ -1,9 +1,20 @@
 import { observable, action, computed } from 'mobx';
 import { locations } from '../stubs/locations';
+import moment from 'moment';
 
 export default class Map {
   @observable locations = {};
+  @observable filteredLocations = {};
   @observable itemOpenStates = {};
+  @observable filters = {
+    date: null,
+    startTime: null,
+    endTime: null,
+  };
+
+  @computed get areFiltersSet () {
+    return (this.filters.date || this.filters.startTime || this.filters.endTime);
+  }
 
   constructor (externalStore) {
     if (externalStore) {
@@ -16,6 +27,39 @@ export default class Map {
     this.fetchExistingLocations();
     return this;
   }
+
+  @action filterLocations = () => {
+    if (!this.areFiltersSet) {
+      this.filteredLocations = {};
+      return;
+    }
+
+    const locationsFormatted = {};
+    const locations = Object.keys(this.locations).filter(location => {
+        const matchesDate = this.filters.date ? moment(this.filters.date).format('l') === moment(location.date).format('l') : true;
+        return matchesDate
+    });
+    locations.forEach(location => locationsFormatted[location] = this.locations[location]);
+    this.filteredLocations = locationsFormatted;
+  };
+
+  @action onFilter = (filters) => {
+    this.filters = {
+      ...this.filters,
+      ...filters,
+    };
+
+    this.filterLocations();
+  };
+
+  @action resetFilters = () => {
+    this.filters = {
+      date: null,
+      startTime: null,
+      endTime: null,
+    };
+    this.filterLocations();
+  };
 
   @action fetchExistingLocations = () => {
     const existingLocations = JSON.parse(localStorage.getItem('locations'));

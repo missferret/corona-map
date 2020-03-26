@@ -19,18 +19,7 @@ export const PlacesAutocomplete = ({ onSelect, existingValue }) => {
     clearSuggestions();
   });
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   const handleInput = e => {
-    // Update the keyword of the input element
     setValue(e.target.value);
   };
 
@@ -38,7 +27,6 @@ export const PlacesAutocomplete = ({ onSelect, existingValue }) => {
     setValue(description, false);
     clearSuggestions();
 
-    // Get latitude and longitude via utility functions
     getGeocode({ address: description })
       .then(results => getLatLng(results[0]))
       .then(({ lat, lng }) => {

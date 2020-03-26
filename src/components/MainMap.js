@@ -24,7 +24,16 @@ const MainMapView = ({ store }) => {
   return (
     <Observer>
       {() => {
-        const { locations, deleteLocation, setOpenState } = store.map;
+        const {
+          locations,
+          filteredLocations,
+          deleteLocation,
+          setOpenState,
+          areFiltersSet,
+        } = store.map;
+
+        const list = areFiltersSet ? filteredLocations : locations;
+
         return (
           <div style={{ height: '100vh', width: '100%' }}>
             <GoogleMapReact
@@ -34,8 +43,8 @@ const MainMapView = ({ store }) => {
               distanceToMouse={distanceToMouse}
             >
               {
-                Object.keys(locations).map(location => {
-                  const locationData = locations[location];
+                Object.keys(list).map(location => {
+                  const locationData = list[location];
                   return (
                     <Marker
                       key={locationData.id}
