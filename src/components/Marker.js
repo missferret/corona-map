@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton, Paper, Typography } from '@material-ui/core';
+import { Paper, Typography } from '@material-ui/core';
 import { Delete, Edit } from '@material-ui/icons';
 import moment from 'moment';
 
@@ -23,7 +23,7 @@ export const Marker = ({ location, open = false, onDelete, onEdit }) => {
       onClick={() => setIsOpen(true)}
       style={{ width: 50, height: 50, background: 'rgba(243,7,7,0.3)', borderRadius: '50%', cursor: 'pointer', position: 'relative' }}>
       {isOpen &&
-        <Paper style={{ padding: 5, position: 'absolute', top: -85, height: 80, width: 110, zIndex: 999, display: 'flex', flexDirection: 'column' }}>
+        <Paper style={{ padding: 5, position: 'absolute', top: -95, height: 80, width: 110, zIndex: 999, display: 'flex', flexDirection: 'column' }}>
           <Typography variant="caption">{name}</Typography>
           <Typography variant="caption">{formattedDate}</Typography>
           <div>

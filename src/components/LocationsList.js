@@ -29,6 +29,7 @@ const LocationsListView = ({ store }) => {
                     const locationData = locations[location];
                     return (
                       <LocationItem
+                        key={location}
                         location={locationData}
                         onDelete={deleteLocation}
                         onEdit={editLocation}

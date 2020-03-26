@@ -60,7 +60,7 @@ export const PlacesAutocomplete = ({ onSelect, existingValue }) => {
           key={id}
           onClick={handleSelect(suggestion)}
         >
-          <strong>{main_text}</strong> <small>{secondary_text}</small>
+          <strong>{main_text}</strong>&nbsp;<small>{secondary_text}</small>
         </MenuItem>
       );
     });

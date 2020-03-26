@@ -24,20 +24,20 @@ export const LocationItem = ({ location, onDelete, onEdit, setOpenState, isOpen 
 
         return (
           <>
-          <ListItem disableGutters key={location.id} style={{ borderTop: '1px solid #f0f0f0' }}>
-            <ListItemText>
-              <Typography>{name}</Typography>
-              <Typography variant="caption">
-                {`${formattedDate} between ${formattedTime(startTime)} and ${formattedTime(endTime)}`}
-              </Typography>
-            </ListItemText>
-            <IconButton edge="end" aria-label="delete" onClick={() => setOpenState(id, !isOpen)}>
-              <Edit />
-            </IconButton>
-            <IconButton edge="end" aria-label="delete" onClick={deleteLocation}>
-              <Delete />
-            </IconButton>
-          </ListItem>
+            <ListItem disableGutters key={location.id} style={{ borderTop: '1px solid #f0f0f0' }}>
+              <ListItemText>
+                <Typography>{name}</Typography>
+                <Typography variant="caption">
+                  {`${formattedDate} between ${formattedTime(startTime)} and ${formattedTime(endTime)}`}
+                </Typography>
+              </ListItemText>
+              <IconButton edge="end" aria-label="delete" onClick={() => setOpenState(id, !isOpen)}>
+                <Edit />
+              </IconButton>
+              <IconButton edge="end" aria-label="delete" onClick={deleteLocation}>
+                <Delete />
+              </IconButton>
+            </ListItem>
             {isOpen &&
               <LocationForm
                 existingLocation={location}
