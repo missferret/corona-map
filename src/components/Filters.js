@@ -33,28 +33,28 @@ export const Filters = ({ filters, onFilter, resetFilters }) => {
                  'aria-label': 'change date',
                }}
              />
-             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-               <KeyboardTimePicker
-                 margin="normal"
-                 id="time-picker"
-                 label="From"
-                 value={startTime}
-                 onChange={setStartTime}
-                 KeyboardButtonProps={{
-                   'aria-label': 'change time',
-                 }}
-               />
-               <KeyboardTimePicker
-                 margin="normal"
-                 id="time-picker"
-                 label="Until"
-                 value={endTime}
-                 onChange={setEndTime}
-                 KeyboardButtonProps={{
-                   'aria-label': 'change time',
-                 }}
-               />
-             </div>
+             {/*<div style={{ display: 'flex', justifyContent: 'space-between' }}>*/}
+             {/*  <KeyboardTimePicker*/}
+             {/*    margin="normal"*/}
+             {/*    id="time-picker"*/}
+             {/*    label="From"*/}
+             {/*    value={startTime}*/}
+             {/*    onChange={setStartTime}*/}
+             {/*    KeyboardButtonProps={{*/}
+             {/*      'aria-label': 'change time',*/}
+             {/*    }}*/}
+             {/*  />*/}
+             {/*  <KeyboardTimePicker*/}
+             {/*    margin="normal"*/}
+             {/*    id="time-picker"*/}
+             {/*    label="Until"*/}
+             {/*    value={endTime}*/}
+             {/*    onChange={setEndTime}*/}
+             {/*    KeyboardButtonProps={{*/}
+             {/*      'aria-label': 'change time',*/}
+             {/*    }}*/}
+             {/*  />*/}
+             {/*</div>*/}
            </FormGroup>
          </MuiPickersUtilsProvider>
          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10 }}>

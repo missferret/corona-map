@@ -33,10 +33,10 @@ export default class Map {
       return;
     }
 
+    const { date } = this.filters;
     const locationsFormatted = {};
     const locations = Object.keys(this.locations).filter(location => {
-        const matchesDate = this.filters.date ? moment(this.filters.date).format('l') === moment(location.date).format('l') : true;
-        return matchesDate
+      return  date ? moment(date).format('l') === moment(this.locations[location].date).format('l') : true;
     });
     locations.forEach(location => locationsFormatted[location] = this.locations[location]);
     this.filteredLocations = locationsFormatted;
