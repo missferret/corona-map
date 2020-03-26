@@ -1,5 +1,4 @@
 import { observable, action, computed } from 'mobx';
-import { locations } from '../stubs/locations';
 import moment from 'moment';
 
 export default class Map {
@@ -67,7 +66,7 @@ export default class Map {
   };
 
   @action saveLocations = () => {
-    localStorage.setItem('locations', JSON.stringify(locations));
+    localStorage.setItem('locations', JSON.stringify(this.locations));
   };
 
   @action setOpenState = (itemId, isOpen) => {
