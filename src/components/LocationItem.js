@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { LocationForm } from './LocationForm';
 import { Observer } from 'mobx-react';
 import { Typography, ListItem, ListItemText, IconButton } from '@material-ui/core';
